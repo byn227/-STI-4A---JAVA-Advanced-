@@ -89,8 +89,9 @@ public class B {
 ### Mémo
 
 - Classe A : chargée à l’instanciation (`new A()`)
+- 
 - Bloc statique : exécuté une fois lors du chargement
-- Types de Class Loader : Bootstrap, Extension, Application
+- Class Loaders = coulisses qui chargent les classes. Types de Class Loader : Bootstrap (classes de base), Extension (classes d'extension), Application (classes du programme)
 - Bloc statique = initialisation globale  
 - Constructeur = initialisation par objet
 
@@ -154,7 +155,7 @@ public class JITTest {
 
 ### Réponses
 
-1. Le JIT Compiler est :
+1. Le JIT Compiler (Just-In-Time Compiler) est :
    - Un compilateur qui transforme le bytecode en code natif
    - S'exécute pendant l'exécution du programme
    - Optimise les performances
