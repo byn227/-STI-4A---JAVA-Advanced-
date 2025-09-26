@@ -81,8 +81,11 @@ computeThread.start();
 
 ### A. Création d'un Thread
 
+Il existe deux méthodes principales pour créer un thread :
+
+#### Méthode 1 : Extends Thread
+
 ```java
-// Méthode 1 : Extends Thread
 class MyThread extends Thread {
     public void run() {
         for (int i = 10; i > 0; i--) {
@@ -96,8 +99,11 @@ class MyThread extends Thread {
         System.out.println("Go !");
     }
 }
+```
 
-// Méthode 2 : Implements Runnable
+#### Méthode 2 : Implements Runnable
+
+```java
 class MyRunnable implements Runnable {
     public void run() {
         // Code du thread
@@ -125,7 +131,7 @@ class MyRunnable implements Runnable {
 
 5. **TIMED_WAITING** : En attente temporisée
    - Attend pour une durée définie
-   - Ex: Thread.sleep()
+   - Ex: `Thread.sleep()`
 
 6. **TERMINATED** : Terminé
    - A fini son exécution
@@ -197,3 +203,103 @@ public class ThreadExample {
 }
 ```
 
+## 8. Concepts clés
+
+### Premier thread et fonction main
+
+- Tout programme Java commence par un thread principal qui exécute `main()`
+- Dans les interfaces graphiques, il existe des threads pour :
+  - L'attente utilisateur
+  - Le redessin des composants
+
+### Création de threads en Java
+
+- Création via la classe `Thread` ou l'interface `Runnable`
+- Un objet `Thread` est une "télécommande" permettant de contrôler :
+  - Démarrage
+  - Priorité
+  - Synchronisation
+
+## 9. Interface Runnable
+
+### Méthode essentielle
+
+```java
+public void run();
+```
+
+- La méthode `run()` contient la tâche à réaliser par le thread
+- C'est l'équivalent de la méthode `main()` pour le thread
+
+### Démarrage
+
+- Un thread est inactif jusqu'à l'appel de `start()`
+- `start()` déclenche l'exécution de `run()`
+
+## 10. Exemples de Création et Démarrage
+
+### Via Runnable (orienté objet)
+
+```java
+class Animation implements Runnable {
+    void run() {
+        while (true) {
+            // Dessine les frames
+            repaint();
+        }
+    }
+}
+
+Animation happy = new Animation("Mr.Happy");
+Thread myThread = new Thread(happy);
+myThread.start();
+```
+
+### Objet autonome
+
+```java
+class Animation implements Runnable {
+    Thread myThread;
+    
+    Animation(String name) {
+        myThread = new Thread(this);
+        myThread.start();
+    }
+    
+    public void run() {
+        // Code d'animation
+    }
+}
+```
+
+### Héritage de Thread
+
+```java
+class Animation extends Thread {
+    public void run() {
+        // Code d'animation
+    }
+}
+
+Animation fun = new Animation("fun");
+fun.start();
+```
+
+## 11. Pourquoi préférer Runnable ?
+
+**Avantages** :
+- Design objet cohérent
+- Possibilité d'hériter d'autres classes (`JFrame`, `JLabel`, etc.)
+- `run()` peut accéder aux membres privés de la classe
+- Structure objet plus flexible
+
+## Points à retenir
+
+1. Toujours séparer :
+   - La logique d'exécution (méthode `run`)
+   - Le contrôle de thread
+
+2. Préférer l'interface `Runnable` à l'héritage de `Thread` pour :
+   - Une meilleure conception orientée objet
+   - Plus de flexibilité
+   - Une meilleure maintenabilité

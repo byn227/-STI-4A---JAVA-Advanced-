@@ -362,6 +362,51 @@ Créer une classe représentant un tableau trié d'entiers avec :
    - Affiche l'état à chaque étape
 
 ### Solution
+```java
+
+class TableauTrie {
+        private int[] tab;
+        private int nbElem=0;
+
+        TableauTrie(){
+            tab=new int[100];
+        }
+        void inserer(int entier ){
+            int i=0;
+
+            if (nbElem < tab.length ){
+                while ((i <nbElem ) && tab[i]<entier)) {
+                    i++;
+                } 
+                for (int j=nbElem; j>i; j--){
+                    tab[j]=tab[j-1];
+                }
+                tab[i]=entier;
+                nbElem++
+            }
+        } 
+        void retirer(int entier){
+            int i;
+            boolean trouve=false;
+            for (i=0;(i<nbElem) && (!trouve); i++)
+                if (tab[i]==entier) {
+                    trouve=true;
+                }
+            if (trouve) {
+                while (i<nbElem){
+                    tab[i-1]=tab[i];
+                    i++;
+                }
+            }
+            nbElem--;
+        }
+        void affiche(){
+            system.out.println("Nouveau affichage: ");
+            for (int=0;i<nbElem;i++){
+                system.out.println(tab[i])
+            }
+        }
+}
 
 ```java
 class TableauTrie {
@@ -503,3 +548,41 @@ Pour la chaîne "saluts mes etudiants" :
   - 'a' (dans "saluts" et "etudiants")
 
 ---
+```java
+public class UtilChaine{
+    string s;
+    UtilChaine(String S){
+        this.s=s
+    }
+    int occurenceCar(char c, int i){
+        int occ=0;
+        for (int j=i;j<s.length();j++){
+            if (s.charAt(j)==c) {
+                occ++
+            }
+        }
+        return occ;
+    boolean existeCar(char c,int deb,int fin ){
+        boolean trouve =false;
+        for (int i=deb; (i<fin) && (!trouve); i++ ){
+            if (s.charAt(i)==c){
+                trouve =true;
+            }
+        }
+    int occurenceMultiple() {
+        int nb=0;
+        for (int =0; i<s.length();i++){
+            if (occurenceCar(s.charAt(i),i)) >1 && !existeCar(s.charAt(i,0,1))){
+                nb++
+            }
+        }
+        return nb;
+    }
+    }
+    public static void main(string[] args){
+        string s="salut mes etudiants";
+        UtilChaine u=new UtilChaine(s);
+        system.out.println("Nombre de carac " + u.occurenceMultiple());
+    }
+}
+}
