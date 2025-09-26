@@ -15,12 +15,17 @@ Apprendre à :
 
 ### Question
 
-Créer une classe `Point` avec :
-1. Deux attributs `x` et `y` de type `double` représentant les coordonnées
-2. Un constructeur prenant deux paramètres pour initialiser les coordonnées
-3. Une méthode `affiche()` qui affiche le point sous la forme `P=(x,y)`
-4. Une méthode `translate(dx, dy)` qui déplace le point selon les valeurs reçues
+1. Créer une classe `Point` avec :
+- Deux attributs `x` et `y` de type `double` représentant les coordonnées
+- Un constructeur prenant deux paramètres pour initialiser les coordonnées
+- Une méthode `affiche()` qui affiche le point sous la forme `P=(x,y)`
+- Une méthode `translate(dx, dy)` qui déplace le point selon les valeurs reçues
 
+2. Écrire une méthode `main` (dans la classe `Point` ou une classe `TestPoint`) qui :
+- Construit un point de coordonnées `(3,5)`.
+- Affiche les coordonnées de ce point.
+- Translate ce point de `(2,3)`.
+- Réaffiche les coordonnées de ce point.
 ### Solution
 
 ```java
