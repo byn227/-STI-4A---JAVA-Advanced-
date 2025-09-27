@@ -303,3 +303,99 @@ fun.start();
    - Une meilleure conception orientée objet
    - Plus de flexibilité
    - Une meilleure maintenabilité
+
+## 12. Résumé des Concepts Avancés
+
+### 1. Processus & Threads
+
+**Les Processus** :
+- Définition : Un programme en cours d’exécution.
+- Java :
+  - `Runtime.getRuntime().exec()` : lance un nouveau processus.
+  - `ProcessBuilder` : gestion fine (environnement, répertoire, redirections de flux).
+  - Gestion des processus fils par `Process` (`waitFor()`, `destroy()`, etc.).
+  - Exécution de commandes externes via `exec`.
+
+**Les Threads (Processus légers)** :
+- Plusieurs threads = plusieurs flux d’exécution au sein d’un même processus Java (un seul espace mémoire partagé).
+- Contrôle sur les threads : priorité, interruption, ordonnancement via la JVM.
+- Thread courant : `Thread.currentThread()` permet de manipuler le thread exécutant.
+
+**Exemple Utilisation de Thread** :
+```java
+Thread t = Thread.currentThread();
+t.setName("MonThread");
+Thread.sleep(1000); // Pause d'une seconde
+```
+
+### 2. API Java pour la Concurrence
+
+**`java.util.concurrent`** :
+- **Executor** : déconnecte la soumission de l’exécution des tâches.
+  - Implémentations : thread pool, I/O asynchrone...
+  - Soumission : `void execute(Runnable command)`
+  - Planification, priorités, délais.
+- **ExecutorService** : contrôle avancé (planification, terminaison…).
+  - Nouvelles interfaces : `Callable<T>` (task avec retour et exceptions).
+  - Soumission : `submit(Callable<T> task)` ou `submit(Runnable task)`.
+  - Renvoie un `Future<T>` (résultat futur d’une tâche asynchrone).
+
+**Exemple d’exécution avec Future** :
+```java
+ExecutorService executor = Executors.newCachedThreadPool();
+Future<Long> future = executor.submit(() -> { /* code */ return System.nanoTime(); });
+executor.shutdown();
+future.get(); // Récupération (bloquante)
+```
+
+- `invokeAll` : exécute plusieurs tâches, retourne leur liste de futures.
+- `invokeAny` : retourne le résultat de la première qui termine sans exception.
+- `shutdown()` / `shutdownNow()` : gestion de la terminaison du pool.
+
+**Planification Avancée** :
+- `ScheduledExecutorService` : planifie dans le temps (`schedule`, `scheduleAtFixedRate`, etc.).
+- Gestion des délais : interface `Delayed`, unités `TimeUnit`.
+
+### 3. Synchronisation et Accès Critique
+
+**Section Critique & Exclusion Mutuelle** :
+- Objectif : garantir l’accès exclusif aux ressources critiques.
+- Mot-clé `volatile` (Java) :
+  - Synchronisation mémoire pour des simples types partagés, mais ne garantit pas l’atomicité des opérations combinées (ex : `++`, `--` entre threads).
+
+**Verrous & Synchronisation** :
+- Les verrous (mutex) : permettent la protection d’une section critique.
+- Exemples : `synchronized`, objets `Lock`, `ReentrantLock`.
+- Sémaphores (comptent les ressources disponibles, gestion du « passage » thread).
+- Moniteurs : primitives d’attente/notification (`wait()`, `notify()`) intégrées (en Java, chaque objet peut servir de moniteur avec `synchronized`, `wait()`, `notify()`).
+
+### 4. Interblocages (Deadlocks) & Starvation
+
+- **Définition** : Blocage mutuel où plusieurs threads attendent indéfiniment une ressource détenue par un autre.
+- **Prévention** : Ordre d’acquisition des verrous, timeout, détection.
+- **Famines (starvation)** : Thread jamais servi, typiquement par mauvaise politique ou par priorité mal équilibrée.
+
+### 5. Problèmes Classiques
+
+**Producteur-Consommateur** :
+- Deux types de threads partagent un tampon : les producteurs déposent, les consommateurs retirent.
+- Synchronisation nécessaire (mutex, sémaphores, moniteurs).
+
+**Lecteurs-Rédacteurs (Readers-Writers)** :
+- Plusieurs threads lecteurs possible si aucun rédacteur ; seul un rédacteur autorisé en même temps.
+- Gestion d’équité et de priorité selon le scénario.
+
+**Philosophes autour de la table (Dining Philosophers)** :
+- Plusieurs processus concurrents accèdent à des ressources partagées (baguettes).
+- Risques : interblocage, famine (solutions via protocoles de prise de ressources).
+
+**Barrières & Variables de Condition** :
+- Barrière : synchronisation de groupes de threads à un point d’exécution.
+- Variables de condition : permettent d’attendre une condition dans une section critique (Java : `wait()`, `notify()`, `Condition` des verrous).
+
+### 6. Divers
+
+**Atomité & Visibilité** :
+- L’atomicité des instructions est critique pour la cohérence de données partagées.
+- `volatile` : visibilité, mais sans atomicité multithread.
+- Pour garantir à la fois atomicité et visibilité, préférer l’utilisation de verrous (mutex) ou atomic classes (`AtomicInteger`, etc.).
