@@ -16,7 +16,7 @@ Implémenter une simulation de trois comptes bancaires. Plusieurs threads réali
 - `BankTestTP.java` : Programme principal. Crée 3 comptes, soumet 3 tâches concurrentes via un pool fixe, attend la fin et affiche les soldes finaux et le total.
 
 
-```
+
 ### Compilation et exécution
 Exécuter depuis la racine du dépôt:
 
