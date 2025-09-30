@@ -51,15 +51,15 @@ class Affiche extends Thread {
 ## EXERCICE 2 : Compte bancaire et Mouvement
 
 **Objectif :**  
-Pour simuler des mouvements sur un compte bancaire, on souhaite écrire deux classes : Compte et Mouvement.
+Pour simuler des mouvements sur un compte bancaire, on souhaite écrire deux classes : `Compte` et `Mouvement`.
 
-La classe Compte représente un compte bancaire avec une valeur initiale stockée dans l'attribut Solde. Elle a les méthodes suivantes : afficheSolde pour afficher le solde du compte, getSolde pour retourner le solde du compte et modifSolde pour permettre la modification du compte en ajoutant une somme spécifiée par un thread donné.
+La classe `Compte` représente un compte bancaire avec une valeur initiale stockée dans l'attribut `solde`. Elle a les méthodes suivantes : `afficheSolde` pour afficher le solde du compte, `getSolde` pour retourner le solde du compte et `modifSolde` pour permettre la modification du compte en ajoutant une somme spécifiée par un thread donné.
 
-La classe Mouvement est un thread représentant un mouvement financier. Chaque mouvement agit sur un compte en ajoutant ou en retirant une somme spécifique. Chaque thread Mouvement exécute un cycle de mouvements (spécifié par la boucle for) en utilisant la méthode modifSolde de la classe Compte. À chaque itération, le thread doit afficher son nom, sa priorité et le solde du compte après la modification.
+La classe `Mouvement` est un thread représentant un mouvement financier. Chaque mouvement agit sur un compte en ajoutant ou en retirant une somme spécifique. Chaque thread `Mouvement` exécute un cycle de mouvements (spécifié par la boucle for) en utilisant la méthode `modifSolde` de la classe `Compte`. À chaque itération, le thread doit afficher son nom, sa priorité et le solde du compte après la modification.
 
-1. Ecrivez la classe Compte
-2. Ecrivez la classe Mouvement
-3. Dans la méthode main de la classe Mouvement, créez une instance de la classe Compte avec une valeur initiale de 500. Ensuite, créez deux threads Mouvement : m1 qui ajoute 100 au compte et m2 qui retire 50 du compte. Démarrez ces threads et attendez leur fin avant d'afficher le solde final du compte.
+1. Ecrivez la classe `Compte`
+2. Ecrivez la classe `Mouvement`
+3. Dans la méthode main de la classe `Mouvement`, créez une instance de la classe `Compte` avec une valeur initiale de 500. Ensuite, créez deux threads `Mouvement` : `m1` qui ajoute 100 au compte et `m2` qui retire 50 du compte. Démarrez ces threads et attendez leur fin avant d'afficher le solde final du compte.
 
 ### 1. Classe Compte
 
@@ -158,8 +158,8 @@ Les classes Entre et Sortie représentent les portes d'entrée et de sortie du j
 - Entre gère l'entrée des personnes en ajoutant un nombre aléatoire de passants.
 - Sortie gère la sortie des personnes en retirant un nombre aléatoire de passants.
 
-1. Ecrivez les classes Compteur, Entre et Sortie
-2. Ecrivez la classe Jardin et démarrez tous les threads pour simuler l'entrée et la sortie des personnes.
+1. Ecrivez les classes `Compteur, Entre et Sortie`
+2. Ecrivez la classe `Jardin` et démarrez tous les threads pour simuler l'entrée et la sortie des personnes.
 
 ### 1. Classes Compteur, Entre, Sortie
 
@@ -250,7 +250,7 @@ class Jardin {
 
 ## EXERCICE 4 : Synchronisation avec Semaphore
 
-Soit la classe Semaphore fournie ci-dessous:
+Soit la classe `Semaphore fournie ci-dessous:
 
 ```java
 class Semaphore {
@@ -279,7 +279,7 @@ class Semaphore {
 }
 ```
 
-Utilisez la classe Semaphore pour compléter les classes Main, ThreadA, ThreadB et ThreadC fournies. Les classes ThreadA, ThreadB et ThreadC affichent respectivement cinq A, cinq B et cinq C. Synchronisez vos threads à l'aide de sémaphores de sorte que l'affichage effectué par l'application soit : ACBACBACBACBACB.
+Utilisez la classe `Semaphore` pour compléter les classes Main, ThreadA, ThreadB et ThreadC fournies. Les classes `ThreadA, ThreadB et ThreadC` affichent respectivement cinq A, cinq B et cinq C. Synchronisez vos threads à l'aide de sémaphores de sorte que l'affichage effectué par l'application soit : ACBACBACBACBACB.
 
 ```java
 public class ThreadA extends Thread {
